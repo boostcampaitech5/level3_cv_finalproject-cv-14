@@ -2,16 +2,26 @@
 
 ## Installation
 
+**streamlit**
+
 ```shell
 $ pip install streamlit
 ```
 
 ```shell
+$ pip install streamlit-option-menu
+```
+
+**deepface demo**
+
+```shell
 $ pip install deepface
 ```
 
+**facenet demo**
+
 ```shell
-$ pip install streamlit-option-menu
+$ pip install facenet_pytorch
 ```
 
 ## Run
@@ -41,9 +51,10 @@ streamlit
 │   ├── calculate.py
 │   ├── clustering.py
 │   ├── predict.py
-│   ├── README.md
 │   └── utils.py
 │
-└── facenet-demo
+├── facenet-demo
+│
+└── README.md
 
 ```
