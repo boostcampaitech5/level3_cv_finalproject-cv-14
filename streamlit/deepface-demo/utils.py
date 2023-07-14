@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+import os
+
 
 def load_image(image_bytes):
     # 바이너리 데이터로 이미지 열기
@@ -18,4 +20,19 @@ def load_image(image_bytes):
     
     return rgb_image
 
-   
+
+def load_path(path):
+    img_paths = []
+
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            if file.endswith('.jpg'):
+                img_path = os.path.join(root, file)
+                #img_paths.append(convert_to_static_url(img_path))
+                img_paths.append(img_path)
+    
+    return img_paths
+
+def convert_to_static_url(image_path):
+    static_url = "app/static" + image_path.split("static")[1]
+    return static_url
