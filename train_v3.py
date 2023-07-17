@@ -230,7 +230,7 @@ def main(args):
                 callback_logging(global_step, loss_am, epoch, cfg.fp16, lr_scheduler.get_last_lr()[0], amp)
 
                 if global_step % cfg.verbose == 0 and global_step > 0:
-                    print('Start Validation')
+                    print('###### Start Validation ########')
                     accuracy, recall, f1, precision = validation(model=backbone, vali_data_loader=test_data_loader, test_path=test_path)
                     
         if cfg.save_all_states:

@@ -10,7 +10,7 @@ config.network = "mobile"
 config.resume = False
 config.output = None
 config.embedding_size = 512
-config.output = "wf4m_arcface_r50"
+# config.output = "wf4m_arcface_r50"
 config.sample_rate = 1.0
 config.fp16 = True
 
