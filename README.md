@@ -54,7 +54,66 @@ Service
 # Face Detection & Recognition
 
 requirements.txt: 필요한 파이썬 라이브러리를 기술한 파일입니다.
-model.py : 모델 파이썬 파일입니다.
+
+
+
+
+####  Pretrained Models & Performance
+
+| 모델 | 데이터 세트 | accuracy | recall | F1 score | precision |
+|---|---|---|---|---|---|
+| Arcface(Resnet 18) | MS1MV3 | 0.5485 | 0.6102 | 0.4579 | 0.3664 |
+| Arcface(mobilenet) | Face emore | 0.5321 | 0.5906 | 0.4410 | 0.3519 |
+| Facenet(Inception) | VGGface2 | 0.8810 | 0.8382 | 0.8262 | 0.8096 |
+
+
+#### How to use
+
+- clone
+
+  ```
+  git clone https://github.com/deepinsight/insightface.git
+  ```
+
+
+#### Prepare Dataset ( For training)
+
+download the refined dataset: (emore recommended)
+
+- [emore dataset @ BaiduDrive](https://pan.baidu.com/s/1eXohwNBHbbKXh5KHyItVhQ), [emore dataset @ Dropbox](https://www.dropbox.com/s/wpx6tqjf0y5mf6r/faces_ms1m-refine-v2_112x112.zip?dl=0)
+- More Dataset please refer to the [original post](https://github.com/deepinsight/insightface/wiki/Dataset-Zoo)
+
+
+------
+
+### 3.2 dataset structure
+
+```
+- facedataset/
+         name1/
+             photo1.jpg
+             photo2.jpg
+             ...
+         name2/
+             photo1.jpg
+             photo2.jpg
+             ...
+         .....
+```
+
+- - -
+
+#
+
+### 3.3 Training:
+
+```bash
+python train.py configs/config
+```
+
+## 4. References 
+
+- This repo is mainly inspired by [deepinsight/insightface](https://github.com/deepinsight/insightface) and [FaceNet](https://github.com/davidsandberg/facenet)
 
 ---
 ## Service Architecture
