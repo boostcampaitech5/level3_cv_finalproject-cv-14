@@ -3,9 +3,8 @@
 
 <!--![](Appendix/intro.png)-->
 
->Insight Face는 훈련과 배치 모두에 최적화된 얼굴 인식, 얼굴 감지 및 얼굴 정렬과 같은 다양한 최첨단 알고리즘을 효율적으로 구현합니다.
->
->AWS에 서버를 두고 node.js와 monogoDB를 연결하며, v100서버에 flask를 통해 모델을 서빙하여 배포했습니다.
+>memory studio는 크게 두가지 폴더로 구성되어있습니다. facerecognition은 arcface loss를 이용한 학습과 pretrained model을 불러와서 finetuning하는데 초점을 두었습니다.
+>그리고 service는 AWS에 서버를 두고 node.js와 monogoDB를 연결하며, v100서버에 flask를 통해 모델을 서빙하여 배포했습니다.
 
 ```
 Face Recognition
