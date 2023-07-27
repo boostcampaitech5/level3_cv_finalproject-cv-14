@@ -13,7 +13,7 @@
 | 이종휘 | domain adaptation finetuning     | https://github.com/gndldl       |
 
 
->```
+```
 Docker FastAPI baseline
 ├── Dockerfile
 ├── Docker-compose.yml
@@ -23,10 +23,10 @@ Docker FastAPI baseline
 	├── model.py
 	├── dataset.py
 	└── inference.py
-    >
+
 └── input_images
     └── image.jpg
-    >
+    
     + model.pt + input_url + @
 ```
 
