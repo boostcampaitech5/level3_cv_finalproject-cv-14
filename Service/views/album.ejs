@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <%- include("head.html") %>
+  <style>
+    .square-img-container {
+      width: 100%;
+      padding-bottom: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .square-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+
+  <body id="page-top" class="d-flex flex-column min-vh-100">
+    <%- include("nav.ejs") %>
+    <header class="masthead bg-primary text-white text-center">
+      <div class="container d-flex align-items-center flex-column">
+        <!-- Masthead Heading-->
+
+        <!-- Masthead Subheading-->
+      </div>
+      <!-- Masthead Heading-->
+      <h1 class="masthead-heading text-uppercase mb-0">Your Memory</h1>
+      <!-- Icon Divider-->
+      <div class="divider-custom divider-light">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+        <div class="divider-custom-line"></div>
+      </div>
+      <a href="upload" class="btn btn-primary my-2">upload Image</a>
+    </header>
+    <!-- Navigation-->
+
+    <!-- Portfolio Section-->
+
+    <div id="portfolio">
+      <% if (typeof images !== 'undefined' && images.length > 0) { %>
+      <main>
+        <div class="album py-5">
+          <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+              <% for (var i = 0; i < images.length; i++) { %>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <img class="img" src="<%= images[i].imagePath %>" width="100%" height="250" />
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                      </div>
+                      <% if (images[i].uploadTime) { %>
+                      <small class="text-muted"><%= timeAgo(images[i].uploadTime) %></small>
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </main>
+      <% } else { %>
+      <div class="text-center mt-5">
+        <h2>사용자의 앨범이 비어있습니다.</h2>
+        <p>사진을 업로드하여 앨범을 채워보세요!</p>
+      </div>
+      <% } %>
+    </div>
+
+    <%function timeAgo(uploadTime) {%> <%const now = new Date();%> <%const uploadedAt = new Date(uploadTime);%> <%const timeDifferenceInSeconds =Math.floor((now
+    - uploadedAt) / 1000);%> <%if (timeDifferenceInSeconds < 60) {%> <%return `${timeDifferenceInSeconds}초 전`;%> <%} else if(timeDifferenceInSeconds < 3600)
+    {%> <%return `${Math.floor(timeDifferenceInSeconds / 60)}분 전`;%> <%} else if (timeDifferenceInSeconds < 86400) {%> <%return
+    `${Math.floor(timeDifferenceInSeconds / 3600)}시간 전`;%> <%} else {%> <%return uploadedAt.toISOString().slice(0, 10); // 날짜만 표시하는 경우%> <%}%> <%}%>
+
+    <!-- About Section-->
+
+    <%- include("footer.html") %>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

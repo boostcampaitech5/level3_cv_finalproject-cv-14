@@ -1,0 +1,44 @@
+- 파이썬 가상환경 설치
+
+python -m venv flask_env
+
+- 파이썬 가상환경 접속
+
+source flask_env/bin/activate
+
+- flask 설치
+
+pip install flask
+
+- flask import
+
+from flask import Flask
+
+- 로컬 실행 
+
+python app.py
+
+- 모듈 설치
+
+pip install torch torchvision
+pip install gunicorn
+pip install facenet_pytorch
+pip install opencv-python
+pip install pandas
+pip install requests
+pip install pymongo
+pip install boto3
+pip install flask-cors
+
+- 내가 만들고 있는 flask 서버로 띄우기 
+(0.0.0.0 -> 모든 ip 접속 허용, 30006 -> ai stage에서 현재 서버의 포트 번호 찾아서 입력하기 )
+
+gunicorn -w 4 -b 0.0.0.0:30006 app:app
+
+- 기타 설정(x 안 해도 무관)
+app export FLASK_APP = app.py
+export FLASK_ENV=development
+
+flask run
+
+pip3 freeze > requirements.txt
