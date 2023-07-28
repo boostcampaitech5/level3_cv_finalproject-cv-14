@@ -5,6 +5,7 @@
 <!--![](Appendix/intro.png)-->
 
 > memory studio는 크게 두가지 폴더로 구성되어있습니다. facerecognition은 ArcFace loss를 이용한 학습과 pretrained model을 불러와서 finetuning하는데 초점을 두었습니다.
+>
 > service에는 Node.js를 구성하는 finalproject 폴더와 Flask api를 구성하는 deploy_ml 폴더로 되어있습니다.
 
 ```
