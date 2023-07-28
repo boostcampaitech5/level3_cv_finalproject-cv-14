@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include("head.html") %>
+    <style>
+      #root {
+        width: 100%;
+        margin: 0 auto;
+        max-width: 800px;
+      }
+
+      .title {
+        text-align: center;
+      }
+
+      .contents {
+        display: flex;
+        flex-direction: row;
+        /* background-color: 255, 170, 171;#ffaaab */
+        background-color: #fff;
+        margin-top: 30px;
+        border-radius: 6px;
+      }
+      /* .contents {
+    background-color: #fff;
+    margin-top: 30px;
+    border-radius: 10px;
+    } */
+
+      .bg-primary {
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+      }
+
+      .contents .upload-box {
+        background-color: #ffffff;
+        width: calc(50% - 15px);
+        box-sizing: border-box;
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .contents .upload-box .drag-file {
+        width: 100%;
+        height: 360px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 3px dashed #dbdbdb;
+        border-radius: 6px;
+      }
+
+      .contents .upload-box .drag-file.highlight {
+        border: 3px dashed red;
+      }
+
+      .contents .upload-box .drag-file .image {
+        width: 60px;
+      }
+
+      .contents .upload-box .drag-file .message {
+        margin-bottom: 0;
+      }
+
+      .contents .upload-box .file-label {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        background-color: #151e26;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        width: 65%;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .contents .upload-box .file {
+        display: none;
+      }
+
+      .contents .files {
+        width: calc(50% - 15px);
+        box-sizing: border-box;
+        overflow: auto;
+        height: 360px;
+        margin-right: 30px;
+        margin-top: 30px;
+      }
+
+      .contents .files .file {
+        display: flex;
+        padding: 20px 20px;
+        border-bottom: 1px solid #dbdbdb;
+      }
+
+      .contents .files .file:last-child {
+        margin-bottom: 0px;
+        border-bottom: none;
+      }
+
+      .contents .files .file .thumbnail {
+        display: flex;
+        flex: none;
+        width: 50px;
+        margin-right: 20px;
+        align-items: center;
+      }
+
+      .contents .files .file .thumbnail .image {
+        width: 100%;
+      }
+
+      .contents .files .file .details {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .contents .files .file .details .header {
+        display: flex;
+      }
+
+      .contents .files .file .details .header .name {
+        width: 100px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      .contents .files .file .details .header .size {
+        margin-left: auto;
+      }
+
+      .contents .files .file .progress {
+        position: relative;
+        height: 6px;
+        background-color: #dbdbdb;
+        overflow: hidden;
+        margin-top: 4px;
+        border-radius: 10px;
+      }
+
+      .contents .files .file .progress .bar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #5b975b;
+      }
+
+      .contents .files .file .status {
+        display: flex;
+        width: 100%;
+      }
+
+      .contents .files .file .delete-btn {
+        cursor: pointer;
+      }
+
+      .contents .files .file .status .percent {
+        margin-right: 10px;
+      }
+
+      .contents .files .file .status .speed {
+        margin-left: auto;
+      }
+
+      @media (max-width: 700px) {
+        .contents {
+          display: flex;
+          flex-direction: column;
+          margin-top: 30px;
+        }
+        .contents .upload-box {
+          width: 100%;
+          box-sizing: border-box;
+          margin-right: 0;
+        }
+        .contents .upload-box .drag-file {
+          height: 150px;
+        }
+        .contents .files {
+          width: 100%;
+          box-sizing: border-box;
+          margin-right: 30;
+          overflow: initial;
+        }
+      }
+      button {
+        border-width: 0px;
+      }
+
+      .upload-btn {
+        background-color: #151e26;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        width: 65%;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .divider-custom {
+        margin: 1.25rem 0 1.5rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .divider-custom .divider-custom-line {
+        width: 100%;
+        max-width: 7rem;
+        height: 0.25rem;
+        background-color: #5a5a5a;
+        border-radius: 1rem;
+        border-color: #5a5a5a !important;
+      }
+      .divider-custom .divider-custom-line:first-child {
+        margin-right: 1rem;
+      }
+      .divider-custom .divider-custom-line:last-child {
+        margin-left: 1rem;
+      }
+      .divider-custom .divider-custom-icon {
+        color: #5a5a5a !important;
+        font-size: 2rem;
+      }
+      .divider-custom.divider-light .divider-custom-line {
+        background-color: #5a5a5a;
+      }
+      .divider-custom.divider-light .divider-custom-icon {
+        color: #5a5a5a !important;
+      }
+    </style>
+  </head>
+
+  <body class="d-flex flex-column min-vh-100">
+    <!-- Navigation-->
+    <header><%- include("nav.ejs") %></header>
+    <main>
+      <div class="masthead text-center mt-5 container d-flex align-items-center flex-column">
+        <div class="container d-flex align-items-center flex-column"></div>
+        <h1 class="masthead-heading text-uppercase mb-0">File Upload</h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+          <div class="divider-custom-line"></div>
+          <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+          <div class="divider-custom-line"></div>
+        </div>
+      </div>
+
+      <div id="portfolio">
+        <div class="container">
+          <div id="upload-status" class="contents">
+            <div class="upload-box">
+              <div id="drop-file" class="drag-file">
+                <img src="assets/image_icon-icons.com_50366.png" alt="파일 아이콘" class="image" />
+                <p class="message">Drag files to upload</p>
+              </div>
+              <label class="file-label" for="chooseFile"><i class="fas fa-image"></i> Choose File</label>
+
+              <!-- <button class="upload-btn" onclick="handleUpload()">upload</button> -->
+              <button class="upload-btn" onclick="handleUpload()"><i class="fa fa-upload"></i> Upload</button>
+
+              <input class="file" id="chooseFile" type="file" multiple onchange="dropFile.handleFiles(this.files)" />
+            </div>
+
+            <div id="files" class="files">
+              <!-- 파일 프리뷰가 나타날 영역 -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      let selectedFiles = [];
+
+      function handleUpload() {
+        if (selectedFiles.length === 0) {
+          alert("이미지를 선택하세요.");
+          return;
+        }
+
+        // FormData를 사용하여 이미지 파일들을 서버로 전송
+        const formData = new FormData();
+        for (const file of selectedFiles) {
+          formData.append("file_object", file);
+        }
+        // 로그인한 사용자 정보를 FormData에 추가
+        formData.append("user_id", "사용자 아이디"); // 사용자 아이디 또는 필요한 사용자 정보를 추가
+
+        fetch("/upload", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // 서버로부터 응답 메시지 표시
+            const uploadStatus = document.getElementById("upload-status");
+            uploadStatus.textContent = data.message;
+
+            // 리다이렉션 수행
+            if (data.redirectUrl) {
+              alert(data.message);
+              window.location.href = data.redirectUrl;
+            }
+
+            clearSelectedFiles(); // 파일 업로드 후 selectedFiles 배열 비워주기
+          })
+          .catch((error) => {
+            console.error("업로드 실패:", error);
+          });
+      }
+
+      function clearSelectedFiles() {
+        const fileListElement = document.getElementById("files");
+        if (fileListElement) {
+          fileListElement.innerHTML = "";
+        }
+        selectedFiles = [];
+      }
+
+      function DropFile(dropAreaId, fileListId) {
+        let dropArea = document.getElementById(dropAreaId);
+        let fileList = document.getElementById(fileListId);
+
+        function preventDefaults(e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+
+        function highlight(e) {
+          preventDefaults(e);
+          dropArea.classList.add("highlight");
+        }
+
+        function unhighlight(e) {
+          preventDefaults(e);
+          dropArea.classList.remove("highlight");
+        }
+
+        function handleDrop(e) {
+          unhighlight(e);
+          let dt = e.dataTransfer;
+          let files = dt.files;
+
+          handleFiles(files);
+
+          const fileList = document.getElementById(fileListId);
+          if (fileList) {
+            fileList.scrollTo({
+              top: fileList.scrollHeight,
+            });
+          }
+        }
+
+        function handleFiles(files) {
+          if (!files || files.length === 0) {
+            alert("이미지를 선택하세요.");
+            return;
+          }
+          // files를 직접 배열로 변환
+          const fileArray = Array.from(files);
+          fileArray.forEach((file) => {
+            if (isImageFile(file)) {
+              selectedFiles.push(file); // 파일 추가 시 spread 연산자 대신 push 메소드 사용
+              previewFile(file);
+            } else {
+              alert("이미지 파일 형식이 아닙니다.");
+            }
+          });
+        }
+
+        function isImageFile(file) {
+          // 파일이 이미지인지 MIME 타입을 기반으로 확인하는 함수
+          const imageFileTypes = ["image/jpeg", "image/png", "image/gif"];
+          return imageFileTypes.includes(file.type);
+        }
+
+        function previewFile(file) {
+          console.log(file);
+          fileList.appendChild(renderFile(file));
+        }
+
+        function renderFile(file) {
+          let fileDOM = document.createElement("div");
+          fileDOM.className = "file";
+          fileDOM.innerHTML = `
+              
+                <div class="thumbnail">
+                  <img src="${URL.createObjectURL(file)}" alt="파일타입 이미지" class="image" name="image-object">
+                </div>
+                <div class="details">
+                  <header class="header">
+                    <span class="name">${file.name}</span>
+                    <span class="size">${file.size}</span>
+                  </header>
+                  <div class="progress">
+                    <div class="bar"></div>
+                  </div>
+                  <div class="status">
+                    <span class="percent">100% done</span>
+                    <span class="speed">90KB/sec</span>
+                  </div>
+                  <div class="delete-btn">X</div>
+                </div>
+               
+              `;
+          const deleteBtn = fileDOM.querySelector(".delete-btn");
+
+          deleteBtn.addEventListener("click", () => {
+            const fileIndex = selectedFiles.indexOf(file);
+            if (fileIndex !== -1) {
+              selectedFiles.splice(fileIndex, 1);
+            }
+            fileDOM.remove(); // Remove the entire file preview when the "X" button is clicked
+            console.log(selectedFiles);
+          });
+
+          const fileList = document.getElementById("files"); // 파일 리스트 DOM 요소 가져오기
+          fileList.appendChild(fileDOM);
+          return fileDOM; // 추가: 생성된 파일 DOM을 반환합니다.
+        }
+
+        dropArea.addEventListener("dragenter", highlight, false);
+        dropArea.addEventListener("dragover", highlight, false);
+        dropArea.addEventListener("dragleave", unhighlight, false);
+        dropArea.addEventListener("drop", handleDrop, false);
+
+        return {
+          handleFiles,
+        };
+      }
+
+      const dropFile = new DropFile("drop-file", "files");
+    </script>
+
+    <%- include("footer.html") %>
+  </body>
+</html>

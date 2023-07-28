@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include("head.html") %>
+    <style>
+      .divider-custom {
+        margin: 1.25rem 0 1.5rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .divider-custom .divider-custom-line {
+        width: 100%;
+        max-width: 7rem;
+        height: 0.25rem;
+        background-color: #5a5a5a;
+        border-radius: 1rem;
+        border-color: #5a5a5a !important;
+      }
+      .divider-custom .divider-custom-line:first-child {
+        margin-right: 1rem;
+      }
+      .divider-custom .divider-custom-line:last-child {
+        margin-left: 1rem;
+      }
+      .divider-custom .divider-custom-icon {
+        color: #5a5a5a !important;
+        font-size: 2rem;
+      }
+      .divider-custom.divider-light .divider-custom-line {
+        background-color: #5a5a5a;
+      }
+      .divider-custom.divider-light .divider-custom-icon {
+        color: #5a5a5a !important;
+      }
+    </style>
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <header><%- include("nav.ejs") %></header>
+    <main>
+      <div class="masthead text-center mt-5 container d-flex align-items-center flex-column">
+        <div class="container d-flex align-items-center flex-column">
+          <h1 class="masthead-heading text-uppercase mb-0">User Info</h1>
+          <!-- Icon Divider-->
+          <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+          </div>
+        </div>
+      </div>
+      <div id="portfolio">
+        <div class="container contents">
+          <!-- 프로필 페이지의 이름 부분 -->
+          <h1>Name : <%= user.name %></h1>
+          <h1>Email: <%= user.email %></h1>
+        </div>
+      </div>
+    </main>
+
+    <%- include("footer.html") %>
+  </body>
+</html>

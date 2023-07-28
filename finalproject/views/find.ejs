@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include("head.html") %>
+    <style>
+      #root {
+        width: 100%;
+        margin: 0 auto;
+        max-width: 800px;
+      }
+
+      .title {
+        text-align: center;
+      }
+
+      .contents {
+        display: flex;
+        flex-direction: row;
+        /* background-color: 255, 170, 171;#ffaaab */
+        background-color: #fff;
+        margin-top: 30px;
+        border-radius: 6px;
+      }
+      /* .contents {
+    background-color: #fff;
+    margin-top: 30px;
+    border-radius: 10px;
+    } */
+
+      .bg-primary {
+        --bs-bg-opacity: 1;
+        background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+      }
+
+      .contents .upload-box {
+        background-color: #ffffff;
+        width: calc(50% - 15px);
+        box-sizing: border-box;
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .contents .upload-box .drag-file {
+        width: 100%;
+        height: 360px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 3px dashed #dbdbdb;
+        border-radius: 6px;
+      }
+
+      .contents .upload-box .drag-file.highlight {
+        border: 3px dashed red;
+      }
+
+      .contents .upload-box .drag-file .image {
+        width: 60px;
+      }
+
+      .contents .upload-box .drag-file .message {
+        margin-bottom: 0;
+      }
+
+      .contents .upload-box .file-label {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        background-color: #151e26;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        width: 65%;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .contents .upload-box .file {
+        display: none;
+      }
+
+      .contents .files {
+        width: calc(50% - 15px);
+        box-sizing: border-box;
+        overflow: auto;
+        height: 360px;
+        margin-right: 30px;
+        margin-top: 30px;
+      }
+
+      .contents .files .file {
+        display: flex;
+        padding: 20px 20px;
+        border-bottom: 1px solid #dbdbdb;
+      }
+
+      .contents .files .file:last-child {
+        margin-bottom: 0px;
+        border-bottom: none;
+      }
+
+      .contents .files .file .thumbnail {
+        display: flex;
+        flex: none;
+        width: 50px;
+        margin-right: 20px;
+        align-items: center;
+      }
+
+      .contents .files .file .thumbnail .image {
+        width: 100%;
+      }
+
+      .contents .files .file .details {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .contents .files .file .details .header {
+        display: flex;
+      }
+
+      .contents .files .file .details .header .name {
+        width: 100px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      .contents .files .file .details .header .size {
+        margin-left: auto;
+      }
+
+      .contents .files .file .progress {
+        position: relative;
+        height: 6px;
+        background-color: #dbdbdb;
+        overflow: hidden;
+        margin-top: 4px;
+        border-radius: 10px;
+      }
+
+      .contents .files .file .progress .bar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #5b975b;
+      }
+
+      .contents .files .file .status {
+        display: flex;
+        width: 100%;
+      }
+
+      .contents .files .file .delete-btn {
+        cursor: pointer;
+      }
+
+      .contents .files .file .status .percent {
+        margin-right: 10px;
+      }
+
+      .contents .files .file .status .speed {
+        margin-left: auto;
+      }
+
+      @media (max-width: 700px) {
+        .contents {
+          display: flex;
+          flex-direction: column;
+          margin-top: 30px;
+        }
+        .contents .upload-box {
+          width: 100%;
+          box-sizing: border-box;
+          margin-right: 0;
+        }
+        .contents .upload-box .drag-file {
+          height: 150px;
+        }
+        .contents .files {
+          width: 100%;
+          box-sizing: border-box;
+          margin-right: 30;
+          overflow: initial;
+        }
+      }
+      button {
+        border-width: 0px;
+      }
+
+      .upload-btn {
+        background-color: #151e26;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        width: 65%;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .divider-custom {
+        margin: 1.25rem 0 1.5rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .divider-custom .divider-custom-line {
+        width: 100%;
+        max-width: 7rem;
+        height: 0.25rem;
+        background-color: #5a5a5a;
+        border-radius: 1rem;
+        border-color: #5a5a5a !important;
+      }
+      .divider-custom .divider-custom-long-line {
+        width: 100%;
+        max-width: 7rem;
+        height: 0.25rem;
+        background-color: #5a5a5a;
+        border-radius: 1rem;
+        border-color: #5a5a5a !important;
+      }
+      .divider-custom .divider-custom-line:first-child {
+        margin-right: 1rem;
+      }
+      .divider-custom .divider-custom-line:last-child {
+        margin-left: 1rem;
+      }
+      .divider-custom .divider-custom-icon {
+        color: #5a5a5a !important;
+        font-size: 2rem;
+      }
+      .divider-custom.divider-light .divider-custom-line {
+        background-color: #5a5a5a;
+      }
+      .divider-custom.divider-light .divider-custom-icon {
+        color: #5a5a5a !important;
+      }
+    </style>
+  </head>
+
+  <body class="d-flex flex-column min-vh-100">
+    <!-- Navigation-->
+    <header><%- include("nav.ejs") %></header>
+    <main>
+      <div class="masthead text-center mt-5 container d-flex align-items-center flex-column">
+        <div class="container d-flex align-items-center flex-column"></div>
+        <h1 class="masthead-heading text-uppercase mb-0">Your Memory Find</h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+          <div class="divider-custom-line"></div>
+          <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+          <div class="divider-custom-line"></div>
+        </div>
+      </div>
+      <div id="portfolio">
+        <div class="container">
+          <div id="upload-status" class="contents">
+            <div class="upload-box">
+              <div id="drop-file" class="drag-file">
+                <img src="assets/image_icon-icons.com_50366.png" alt="파일 아이콘" class="image" />
+                <p class="message">Drag files to upload</p>
+              </div>
+              <label class="file-label" for="chooseFile"><i class="fas fa-image"></i>Choose File</label>
+
+              <!-- <button class="upload-btn" onclick="handleUpload()">upload</button> -->
+              <button class="upload-btn" onclick="handleUpload()"><i class="fa fa-upload"></i>Find</button>
+
+              <input class="file" id="chooseFile" type="file" onchange="dropFile.handleFiles(this.files)" />
+            </div>
+            <div id="files" class="files"></div>
+          </div>
+        </div>
+
+        <div class="containe">
+          <div class="b-example-divider"></div>
+          <div id="result" class="files"></div>
+        </div>
+      </div>
+    </main>
+    <!-- FOOTER -->
+    <script>
+      const timeAgo = (uploadTime) => {
+        const now = new Date();
+        const uploadedAt = new Date(uploadTime);
+        const timeDifferenceInSeconds = Math.floor((now - uploadedAt) / 1000);
+        if (timeDifferenceInSeconds < 60) {
+          return `${timeDifferenceInSeconds}초 전`;
+        } else if (timeDifferenceInSeconds < 3600) {
+          return `${Math.floor(timeDifferenceInSeconds / 60)}분 전`;
+        } else if (timeDifferenceInSeconds < 86400) {
+          return `${Math.floor(timeDifferenceInSeconds / 3600)}시간 전`;
+        } else {
+          return uploadedAt.toISOString().slice(0, 10); // 1일 이상일 경우 날짜만 표시
+        }
+      };
+      // 서버로부터 받은 검색 결과를 표시하는 함수
+      function displaySearchResult(result) {
+        const resultArea = document.getElementById("result");
+        resultArea.innerHTML = ""; // 이전 결과를 비우기
+
+        if (result && result.length > 0) {
+          // 앨범 형식으로 이미지를 출력하는 코드
+          const container = document.createElement("div");
+          container.classList.add("album", "py-5");
+
+          const albumContainer = document.createElement("div");
+          albumContainer.classList.add("container");
+
+          const row = document.createElement("div");
+          row.classList.add("row", "row-cols-1", "row-cols-sm-2", "row-cols-md-4", "g-3");
+
+          result.forEach((imageUrl) => {
+            const col = document.createElement("div");
+            col.classList.add("col");
+
+            const card = document.createElement("div");
+            card.classList.add("card", "shadow-sm");
+
+            const imageElement = document.createElement("img");
+            imageElement.classList.add("img");
+            imageElement.setAttribute("src", imageUrl);
+            imageElement.setAttribute("alt", "Image");
+            imageElement.setAttribute("width", "100%");
+            imageElement.setAttribute("height", "250");
+
+            const cardBody = document.createElement("div");
+            cardBody.classList.add("card-body");
+
+            const btnGroup = document.createElement("div");
+            btnGroup.classList.add("d-flex", "justify-content-between", "align-items-center");
+
+            const viewButton = document.createElement("button");
+            viewButton.setAttribute("type", "button");
+            viewButton.classList.add("btn", "btn-sm", "btn-outline-secondary");
+            viewButton.textContent = "View";
+
+            const deleteButton = document.createElement("button");
+            deleteButton.setAttribute("type", "button");
+            deleteButton.classList.add("btn", "btn-sm", "btn-outline-secondary");
+            deleteButton.textContent = "Delete";
+
+            const time = document.createElement("small");
+            time.classList.add("text-muted");
+            time.textContent = timeAgo(new Date()); // 시간 대신 현재 시간을 예시로 사용
+
+            // 버튼과 시간 요소를 부모 요소에 추가
+            btnGroup.appendChild(viewButton);
+            btnGroup.appendChild(deleteButton);
+            cardBody.appendChild(btnGroup);
+            cardBody.appendChild(time);
+
+            // 이미지와 cardBody를 card에 추가
+            card.appendChild(imageElement);
+            card.appendChild(cardBody);
+
+            // col에 card를 추가하고, col을 row에 추가
+            col.appendChild(card);
+            row.appendChild(col);
+          });
+
+          // row를 albumContainer에 추가하고, albumContainer를 container에 추가
+          albumContainer.appendChild(row);
+          container.appendChild(albumContainer);
+
+          // container를 resultArea에 추가
+          resultArea.appendChild(container);
+        } else {
+          // 검색 결과가 없을 때 처리하는 코드
+          const noResultMessage = document.createElement("p");
+          noResultMessage.textContent = "검색 결과가 없습니다.";
+          noResultMessage.classList.add("no-result-message");
+
+          resultArea.appendChild(noResultMessage);
+        }
+      }
+
+      let selectedFiles = [];
+
+      function handleUpload() {
+        if (selectedFiles.length === 0) {
+          alert("이미지를 선택하세요.");
+          return;
+        }
+
+        // FormData를 사용하여 이미지 파일들을 서버로 전송
+        const formData = new FormData();
+        for (const file of selectedFiles) {
+          formData.append("file_object", file);
+        }
+        // 로그인한 사용자 정보를 FormData에 추가
+        formData.append("user_id", "사용자 아이디"); // 사용자 아이디 또는 필요한 사용자 정보를 추가
+
+        fetch("/find", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            displaySearchResult(data.result);
+
+            clearSelectedFiles(); // 파일 업로드 후 selectedFiles 배열 비워주기
+          })
+          .catch((error) => {
+            console.error("업로드 실패:", error);
+          });
+      }
+
+      function clearSelectedFiles() {
+        const fileListElement = document.getElementById("files");
+        if (fileListElement) {
+          fileListElement.innerHTML = "";
+        }
+        selectedFiles = [];
+      }
+
+      function DropFile(dropAreaId, fileListId) {
+        let dropArea = document.getElementById(dropAreaId);
+        let fileList = document.getElementById(fileListId);
+
+        function preventDefaults(e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+
+        function highlight(e) {
+          preventDefaults(e);
+          dropArea.classList.add("highlight");
+        }
+
+        function unhighlight(e) {
+          preventDefaults(e);
+          dropArea.classList.remove("highlight");
+        }
+
+        function handleDrop(e) {
+          unhighlight(e);
+          let dt = e.dataTransfer;
+          let files = dt.files;
+
+          handleFiles(files);
+
+          const fileList = document.getElementById(fileListId);
+          if (fileList) {
+            fileList.scrollTo({
+              top: fileList.scrollHeight,
+            });
+          }
+        }
+
+        function handleFiles(files) {
+          const fileList = document.getElementById("files");
+          fileList.innerHTML = ""; // 기존에 선택한 파일들을 비워줍니다.
+
+          const fileArray = Array.from(files);
+          if (fileArray.length > 0) {
+            // 최근 1개의 파일만 추가합니다.
+            const file = fileArray[fileArray.length - 1];
+            if (isImageFile(file)) {
+              previewFile(file);
+              selectedFiles = [file]; // 최근 1개의 파일을 selectedFile에 저장합니다.
+            } else {
+              alert("이미지 파일 형식이 아닙니다.");
+            }
+          } else {
+            alert("이미지를 선택하세요.");
+          }
+        }
+
+        function isImageFile(file) {
+          // 파일이 이미지인지 MIME 타입을 기반으로 확인하는 함수
+          const imageFileTypes = ["image/jpeg", "image/png", "image/gif"];
+          return imageFileTypes.includes(file.type);
+        }
+
+        function previewFile(file) {
+          console.log(file);
+          fileList.appendChild(renderFile(file));
+        }
+
+        function renderFile(file) {
+          let fileDOM = document.createElement("div");
+          fileDOM.className = "file";
+          fileDOM.innerHTML = `
+
+              <div class="thumbnail">
+                <img src="${URL.createObjectURL(file)}" alt="파일타입 이미지" class="image" name="image-object">
+              </div>
+              <div class="details">
+                <header class="header">
+                  <span class="name">${file.name}</span>
+                  <span class="size">${file.size}</span>
+                </header>
+                <div class="progress">
+                  <div class="bar"></div>
+                </div>
+                <div class="status">
+                  <span class="percent">100% done</span>
+                  <span class="speed">90KB/sec</span>
+                </div>
+                <div class="delete-btn">X</div>
+              </div>
+
+            `;
+          const deleteBtn = fileDOM.querySelector(".delete-btn");
+
+          deleteBtn.addEventListener("click", () => {
+            const fileIndex = selectedFiles.indexOf(file);
+            if (fileIndex !== -1) {
+              selectedFiles.splice(fileIndex, 1);
+            }
+            fileDOM.remove(); // Remove the entire file preview when the "X" button is clicked
+            console.log(selectedFiles);
+          });
+
+          const fileList = document.getElementById("files"); // 파일 리스트 DOM 요소 가져오기
+          fileList.appendChild(fileDOM);
+          return fileDOM; // 추가: 생성된 파일 DOM을 반환합니다.
+        }
+
+        dropArea.addEventListener("dragenter", highlight, false);
+        dropArea.addEventListener("dragover", highlight, false);
+        dropArea.addEventListener("dragleave", unhighlight, false);
+        dropArea.addEventListener("drop", handleDrop, false);
+
+        return {
+          handleFiles,
+        };
+      }
+
+      const dropFile = new DropFile("drop-file", "files");
+    </script>
+    <%- include("footer.html") %>
+  </body>
+</html>

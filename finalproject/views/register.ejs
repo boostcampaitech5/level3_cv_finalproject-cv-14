@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include("head.html") %>
+
+    <!-- Custom styles for this template -->
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, 0.1);
+        border: solid rgba(0, 0, 0, 0.15);
+        border-width: 1px 0;
+        box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1), inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -0.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      .container {
+        max-width: 960px;
+      }
+    </style>
+  </head>
+  <body class="bg-light d-flex flex-column min-vh-100">
+    <header><%- include("nav.ejs") %></header>
+
+    <div class="container">
+      <main>
+        <div class="py-5 text-center">
+          <img class="d-block mx-auto mb-4" src="assets/hiai_logo.png" alt="" width="100" height="80" />
+          <h2>Sign-Up form</h2>
+        </div>
+
+        <form id="register-form" action="/register" method="post" onsubmit="return validateAndSubmitForm(event)">
+          <div class="form-floating mb-3">
+            <input class="form-control" type="text" id="name-input" name="name" placeholder="Username" />
+            <label for="name-input">Username</label>
+            <span class="error-message" id="name-error"></span>
+          </div>
+          <div class="form-floating mb-3">
+            <input class="form-control" type="text" id="email-input" name="email" placeholder="Emali" />
+            <label for="email-input">Email</label>
+            <span class="error-message" id="email-error"></span>
+            <button class="btn btn-primary btn-block mt-3" type="button" id="check-email-duplication-btn">Check Email Duplication</button>
+            <span id="email-duplication-result" class="error-message"></span>
+          </div>
+          <div class="form-floating mb-3">
+            <input class="form-control" type="password" id="password-input" name="password" placeholder="Password" />
+            <label for="password-input">Password</label>
+            <span class="error-message" id="password-error"></span>
+          </div>
+          <div class="form-floating mb-3">
+            <input class="form-control" type="password" id="confirm_password-input" name="confirm_password" placeholder="Confirm Password" />
+            <label for="confirm_password-input">Confirm Password</label>
+            <span class="error-message" id="confirm-password-error"></span>
+          </div>
+          <button class="btn btn-primary btn-block mt-3" type="button" id="register-btn">Register</button>
+          <span id="form-submit-error" class="error-message"></span>
+        </form>
+        <div class="text-center py-3">
+          <div class="small"><a href="/">Already have an account? Login!</a></div>
+        </div>
+      </main>
+    </div>
+    <script>
+      // 중복 체크 결과를 저장하는 변수
+      let isEmailAvailable = false;
+      // "Check Email Duplication" 버튼 클릭 이벤트 리스너 등록
+      document.getElementById("check-email-duplication-btn").addEventListener("click", checkEmailDuplication);
+
+      // 회원가입 버튼 클릭 이벤트 리스너 등록
+      document.getElementById("register-btn").addEventListener("click", validateAndSubmitForm);
+
+      // 이메일 중복 체크를 수행하는 함수
+      async function checkEmailDuplication() {
+        const emailInput = document.getElementById("email-input").value;
+
+        // 서버로 AJAX 요청 보냄
+        const response = await fetch("/checkEmailDuplication", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: emailInput,
+          }),
+        });
+
+        const data = await response.json();
+
+        const emailDuplicationResult = document.getElementById("email-duplication-result");
+
+        if (data.isDuplicate) {
+          // 이메일 중복 시 에러 메시지 출력
+          emailDuplicationResult.innerText = "이미 사용 중인 이메일입니다.";
+          isEmailAvailable = false; // 중복 체크 결과 변수에 true 저장
+        } else {
+          // 이메일 중복이 아닐 때 에러 메시지 지우기
+          emailDuplicationResult.innerText = "사용 가능한 이메일입니다.";
+          isEmailAvailable = true; // 중복 체크 결과 변수에 false 저장
+        }
+      }
+
+      // 유효성 검사와 이메일 중복 체크를 함께 수행하는 함수
+      async function validateAndSubmitForm(event) {
+        event.preventDefault(); // 폼 제출을 막음
+
+        const emailDuplicationResult = document.getElementById("email-duplication-result");
+
+        const name = document.getElementById("name-input").value;
+        const email = document.getElementById("email-input").value;
+        const password = document.getElementById("password-input").value;
+        const confirmPassword = document.getElementById("confirm_password-input").value;
+        const formSubmitError = document.getElementById("form-submit-error");
+
+        // 각 에러 메시지를 출력하는 <span> 요소를 가져옴
+        const nameError = document.getElementById("name-error");
+        const emailError = document.getElementById("email-error");
+        const passwordError = document.getElementById("password-error");
+        const confirmPasswordError = document.getElementById("confirm-password-error");
+
+        // 에러 메시지를 초기화
+        nameError.innerText = "";
+        emailError.innerText = "";
+        passwordError.innerText = "";
+        confirmPasswordError.innerText = "";
+        formSubmitError.innerText = "";
+
+        // 이름
+        const regName = /^[가-힣a-zA-Z]{2,15}$/;
+        // 이메일
+        const regMail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+        // pw
+        const regIdPw = /^[a-zA-Z0-9]{4,12}$/;
+
+        // 이름 확인
+        if (!name) {
+          nameError.innerText = "이름을 입력하세요.";
+          event.preventDefault();
+          return false;
+        } else if (!regName.test(name)) {
+          nameError.innerText = "최소 2글자 이상, 한글과 영어만 입력하세요.";
+          event.preventDefault();
+          return false;
+        }
+
+        // 메일주소 확인
+        if (!email) {
+          emailError.innerText = "메일주소를 입력하세요.";
+          event.preventDefault();
+          return false;
+        } else if (!regMail.test(email)) {
+          emailError.innerText = "잘못된 이메일 형식입니다.";
+          event.preventDefault();
+          return false;
+        } else if (!isEmailAvailable) {
+          emailDuplicationResult.innerText = "이메일 중복 체크를 해주세요.";
+          return; // 중복 체크가 완료되지 않았으므로 폼 제출 중단
+        }
+
+        // 비밀번호 확인
+        if (!password) {
+          passwordError.innerText = "비밀번호를 입력하세요.";
+          event.preventDefault();
+          return false;
+        } else if (!regIdPw.test(password)) {
+          // 비밀번호 영어 대소문자 확인
+          passwordError.innerText = "4~12자 영문 대소문자, 숫자만 입력하세요.";
+          event.preventDefault();
+          return false;
+        } else if (password === email) {
+          // 비밀번호와 이메일 비교
+          confirmPasswordError.innerText = "이메일과 비밀번호는 같을 수 없습니다!";
+          event.preventDefault();
+          return false;
+        }
+
+        if (!confirmPassword) {
+          confirmPasswordError.innerText = "비밀번호를 입력하세요.";
+          event.preventDefault();
+          return false;
+        } else if (password !== confirmPassword) {
+          confirmPasswordError.innerText = "비밀번호 확인이 일치하지 않습니다";
+          event.preventDefault();
+          return false;
+        }
+        // // 폼 데이터를 서버로 전송
+        // const response = await fetch("/register", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //         name: name,
+        //         email: email,
+        //         password: password,
+        //         confirm_password: confirmPassword
+        //     }),
+        // });
+
+        // // 서버로부터 JSON 응답 받음
+        // const data = await response.json();
+        // if (data.success) {
+        //     // 회원가입 성공 알림창 띄우기
+        //     alert(data.message);
+        //     // 로그인 페이지로 리디렉션
+        //     window.location.href = "/login";
+        // } else {
+        //     // 회원가입 실패 알림창 띄우기
+        //     alert(data.message);
+        // }
+        document.getElementById("register-form").submit();
+
+        // // 이메일 중복 체크
+        // const emailDuplicationError = document.getElementById("email-duplication-error");
+        // emailDuplicationError.innerText = ""; // 에러 메시지 초기화
+
+        // const isDuplicateChecked = await checkEmailDuplication();
+        // if (isDuplicateChecked) {
+        //     // 이메일을 사용할 수 있는 경우 메시지 출력
+        //     emailDuplicationError.innerText = "이메일을 사용할 수 있습니다.";
+
+        // } else {
+        //     // 이메일 중복 체크를 하지 않았을 경우 에러 메시지 출력
+        //     emailDuplicationError.innerText = "이메일 중복 체크를 해주세요.";
+        //     event.preventDefault(); // 폼 제출을 막음
+        // }
+
+        // // 제출 버튼의 동작을 막음
+        // event.preventDefault();
+      }
+    </script>
+    <!-- FOOTER -->
+    <%- include("footer.html") %>
+  </body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include("head.html") %>
+    <style>
+      .square-img-container {
+        width: 100%;
+        padding-bottom: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .square-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .divider-custom {
+        margin: 1.25rem 0 1.5rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .divider-custom .divider-custom-line {
+        width: 100%;
+        max-width: 7rem;
+        height: 0.25rem;
+        background-color: #5a5a5a;
+        border-radius: 1rem;
+        border-color: #5a5a5a !important;
+      }
+      .divider-custom .divider-custom-line:first-child {
+        margin-right: 1rem;
+      }
+      .divider-custom .divider-custom-line:last-child {
+        margin-left: 1rem;
+      }
+      .divider-custom .divider-custom-icon {
+        color: #5a5a5a !important;
+        font-size: 2rem;
+      }
+      .divider-custom.divider-light .divider-custom-line {
+        background-color: #5a5a5a;
+      }
+      .divider-custom.divider-light .divider-custom-icon {
+        color: #5a5a5a !important;
+      }
+    </style>
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <header><%- include("nav.ejs") %></header>
+    <main>
+      <div class="masthead text-center mt-5 container d-flex align-items-center flex-column">
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0">Your Memory</h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+          <div class="divider-custom-line"></div>
+          <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+          <div class="divider-custom-line"></div>
+        </div>
+        <div>
+          <a href="upload" class="btn btn-primary my-2">upload Image</a>
+        </div>
+      </div>
+
+      <!-- Navigation-->
+
+      <!-- Portfolio Section-->
+
+      <div id="portfolio">
+        <% if (typeof images !== 'undefined' && images.length > 0) { %>
+
+        <div class="album py-5">
+          <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+              <% for (var i = 0; i < images.length; i++) { %>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <img class="img" src="<%= images[i].imagePath %>" width="100%" height="250" />
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                      </div>
+                      <% if (images[i].uploadTime) { %>
+                      <small class="text-muted"><%= timeAgo(images[i].uploadTime) %></small>
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <% } else { %>
+      <div class="text-center mt-5">
+        <h2>사용자의 앨범이 비어있습니다.</h2>
+        <p>사진을 업로드하여 앨범을 채워보세요!</p>
+      </div>
+      <% } %> <%function timeAgo(uploadTime) {%> <%const now = new Date();%> <%const uploadedAt = new Date(uploadTime);%> <%const timeDifferenceInSeconds
+      =Math.floor((now - uploadedAt) / 1000);%> <%if (timeDifferenceInSeconds < 60) {%> <%return `${timeDifferenceInSeconds}초 전`;%> <%} else
+      if(timeDifferenceInSeconds < 3600) {%> <%return `${Math.floor(timeDifferenceInSeconds / 60)}분 전`;%> <%} else if (timeDifferenceInSeconds < 86400) {%>
+      <%return `${Math.floor(timeDifferenceInSeconds / 3600)}시간 전`;%> <%} else {%> <%return uploadedAt.toISOString().slice(0, 10); // 날짜만 표시하는 경우%>
+      <%}%> <%}%>
+
+      <!-- About Section-->
+    </main>
+    <%- include("footer.html") %>
+  </body>
+</html>
