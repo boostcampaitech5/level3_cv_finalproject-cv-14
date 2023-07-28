@@ -54,6 +54,7 @@ Service
 | 이종휘 | https://github.com/gndldl       |
 
 <br/>
+---
 
 # 2. Face Detection & Recognition
 
@@ -112,6 +113,7 @@ python train.py configs/config
 ```
 
 <br/>
+---
 
 # 3. Service Architecture
 
@@ -132,9 +134,10 @@ python train.py configs/config
 ![](Appendix/servicear.png)
 
 <br/>
+---
 
 # 4. References
 
 - This repo is mainly inspired by [deepinsight/insightface](https://github.com/deepinsight/insightface) and [FaceNet](https://github.com/davidsandberg/facenet)
 
----
+
