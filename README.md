@@ -1,4 +1,6 @@
-# Memory sutdio
+# 1. Memory sutdio
+
+<br/>
 
 ## Intro
 
@@ -12,11 +14,12 @@
 Face Recognition
 ├── Backbone
 ├── configs
-├── docs
+└── docs
   ├── dataset.py
   ├── train.py
   ├── validation.py
   └── inference.py
+  └── requirements.txt
 
 Service
 └── finalproject
@@ -29,12 +32,15 @@ Service
 └── deploy_ml
   ├── app.py
   └── requirements.txt
-
 ```
 
-# Web Page URL
+<br/>
+
+## Web Page URL
 
 ### http://memory-studio.ap-northeast-2.elasticbeanstalk.com/
+
+<br/>
 
 ## Member
 
@@ -47,11 +53,15 @@ Service
 | 신중현 | https://github.com/Blackeyes0u0 |
 | 이종휘 | https://github.com/gndldl       |
 
-# Face Detection & Recognition
+<br/>
+
+# 2. Face Detection & Recognition
 
 requirements.txt: 필요한 파이썬 라이브러리를 기술한 파일입니다.
 
-#### Pretrained Models & Performance
+<br/>
+
+## 2.1 Pretrained Models & Performance
 
 | 모델               | 데이터 세트 | accuracy | recall | F1 score | precision |
 | ------------------ | ----------- | -------- | ------ | -------- | --------- |
@@ -59,24 +69,27 @@ requirements.txt: 필요한 파이썬 라이브러리를 기술한 파일입니�
 | Arcface(mobilenet) | Face emore  | 0.5321   | 0.5906 | 0.4410   | 0.3519    |
 | Facenet(Inception) | VGGface2    | 0.8810   | 0.8382 | 0.8262   | 0.8096    |
 
-#### How to use
+<br/>
+
+## 2.2 How to use
 
 - clone
 
   ```
   git clone https://github.com/deepinsight/insightface.git
   ```
+<br/>
 
-#### Prepare Dataset ( For training)
+## 2.3 Prepare Dataset ( For training)
 
 download the refined dataset: (emore recommended)
 
 - [emore dataset @ BaiduDrive](https://pan.baidu.com/s/1eXohwNBHbbKXh5KHyItVhQ), [emore dataset @ Dropbox](https://www.dropbox.com/s/wpx6tqjf0y5mf6r/faces_ms1m-refine-v2_112x112.zip?dl=0)
 - More Dataset please refer to the [original post](https://github.com/deepinsight/insightface/wiki/Dataset-Zoo)
 
----
+<br/>
 
-### 3.2 dataset structure
+## 2.4 dataset structure
 
 ```
 - facedataset/
@@ -90,33 +103,38 @@ download the refined dataset: (emore recommended)
              ...
          .....
 ```
+<br/>
 
----
-
-#
-
-### 3.3 Training:
+## 2.5 Training:
 
 ```bash
 python train.py configs/config
 ```
 
-## 4. References
+<br/>
 
-- This repo is mainly inspired by [deepinsight/insightface](https://github.com/deepinsight/insightface) and [FaceNet](https://github.com/davidsandberg/facenet)
-
----
-
-## Service Architecture
+# 3. Service Architecture
 
 ![](Appendix/service.png)
 
 > v100서버에 Flask를 RESTful API로 구현하여 모델을 서빙하고 배포했습니다.
-
+>
 > AWS Elastic Beanstalk를 사용하여 Node.js를 배포 했고, Flask api와 통신하고 있습니다.
-
+>
 > MongoDB Atlas를 사용하여 클라우드 환경의 MongoDB를 연결하였습니다.
-
+>
 > v100서버에 Flask를 통해 모델을 서빙하여 배포했습니다.
 
+
+<br/><br/>
+
+
 ![](Appendix/servicear.png)
+
+<br/>
+
+# 4. References
+
+- This repo is mainly inspired by [deepinsight/insightface](https://github.com/deepinsight/insightface) and [FaceNet](https://github.com/davidsandberg/facenet)
+
+---
