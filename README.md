@@ -20,14 +20,14 @@ Face Recognition
 Service
 └── finalproject
   ├── node_modules
-	├── public
-	├── views
-	├── server.js
+  ├── public
+  ├── views
+  ├── server.js
   └── package.json
   └── package-lock.json
 └── deploy_ml
   ├── app.py
-  ├── requirements.txt
+  └── requirements.txt
 
 ```
 
