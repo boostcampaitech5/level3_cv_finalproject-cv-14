@@ -13,7 +13,7 @@
     </a>
 </p>
 
-# 1. Intro
+# 1. About
 ![](Appendix/intro1.png)
 ![](Appendix/intro2.png)
 
