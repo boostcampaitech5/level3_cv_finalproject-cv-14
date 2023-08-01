@@ -11,6 +11,9 @@
     <a href="https://www.youtube.com/watch?v=gP6VshZ0Cgg">
         <img alt="GitHub release" src="https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white">
     </a>
+    <a href="">
+        <img alt="Python" src ="https://img.shields.io/badge/PDF-blue.svg?&style=for-the-badge&logo=pdf&logoColor=white">
+    </a>
 </p>
 
 # 1. About
