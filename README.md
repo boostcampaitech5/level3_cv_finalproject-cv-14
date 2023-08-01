@@ -89,11 +89,13 @@ requirements.txt: 필요한 파이썬 라이브러리를 기술한 파일입니�
 
 ## 2.1 Pretrained Models & Performance
 
-| 모델               | 데이터 세트 | accuracy | recall | F1 score | precision |
-| ------------------ | ----------- | -------- | ------ | -------- | --------- |
-| Arcface(Resnet 18) | MS1MV3      | 0.5485   | 0.6102 | 0.4579   | 0.3664    |
-| Arcface(mobilenet) | Face emore  | 0.5321   | 0.5906 | 0.4410   | 0.3519    |
-| Facenet(Inception) | VGGface2    | 0.8810   | 0.8382 | 0.8262   | 0.8096    |
+| Model(Backbone) | dataset | Accuracy | F1-score |
+|---|---|---|---|
+| Arcface(ResNet-18) | MS1MV3 | 0.5485 | 0.4579 |
+| Arcface(MobileNet) | face-emore | 0.5321 | 0.4410 |
+| Arcface(ResNet-50)-scratch | Web-face | 0.7812 | 0.7644 |
+| Facenet(Inception-ResNet) | VggFace2 | 0.8810 | 0.8262 |
+| Facenet(ResNet-50)-scratch | Web-face | 0.7286 | 0.6227 |
 
 <br/>
 
