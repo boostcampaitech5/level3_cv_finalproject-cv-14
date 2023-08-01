@@ -1,8 +1,9 @@
 
-<h1>추억사진관</h1>
+<h1 style="text-align: center;">Memory Studio</h1>
+
 <p align="center">
     <br>
-    <img src="Appendix/hiai_logo_280.png" width="77"/>
+    <img src="Appendix/hiai_logo.png" width="77"/>
     <br>
 <p>
   
