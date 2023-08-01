@@ -1,6 +1,6 @@
 <div align=center>
-    <h1>Memory Studio</h1>
     <img src="Appendix/hiai_logo.png" width="77"/>
+    <h1>Memory Studio</h1>
 </div>
 ---
   
