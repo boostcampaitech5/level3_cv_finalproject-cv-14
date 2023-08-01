@@ -1,4 +1,20 @@
-# 1. Memory sutdio
+
+<p align="center">
+    <br>
+    <img src="Appendix/hiai_logo.png" width="400"/>
+    <br>
+<p>
+  
+<p align="center">
+    <a href="http://memory-studio.ap-northeast-2.elasticbeanstalk.com/">
+        <img alt="Documentation" src="https://img.shields.io/website/http/huggingface.co/docs/transformers/index.svg?down_color=red&down_message=offline&up_message=online">
+    </a>
+    <a href="https://youtu.be/gP6VshZ0Cgg">
+        <img alt="GitHub release" src="Appendix/youtube.svg">
+    </a>
+</p>
+
+# 1. Intro
 ![](Appendix/intro1.png)
 ![](Appendix/intro2.png)
 
