@@ -50,7 +50,7 @@ Service
 
 <br/>
 
-## Web Page URL
+## Web Page
 
 ### http://memory-studio.ap-northeast-2.elasticbeanstalk.com/
 
