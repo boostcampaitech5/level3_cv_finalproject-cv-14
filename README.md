@@ -1,11 +1,8 @@
-
-<h1 style="text-align: center;">Memory Studio</h1>
-
-<p align="center">
-    <br>
+<div align=center>
+    <h1 style="text-align: center;">Memory Studio</h1>
     <img src="Appendix/hiai_logo.png" width="77"/>
-    <br>
-<p>
+</div>
+
   
 <p align="center">
     <a href="http://memory-studio.ap-northeast-2.elasticbeanstalk.com/">
