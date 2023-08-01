@@ -86,8 +86,11 @@ Service
 # 2. Face Detection & Recognition
 
 Backbone : 사용한 backbone model을 모아놓은 파일입니다.
+
 configs : train.py에 대한 configs 파일입니다.
+
 requirements.txt: 필요한 파이썬 라이브러리를 기술한 파일입니다.
+
 train.py : config 파일과 함께 train 합니다.
 
 <br/>
