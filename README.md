@@ -51,10 +51,12 @@ Service
 <br/>
 
 ## Web Page
-
-### http://memory-studio.ap-northeast-2.elasticbeanstalk.com/
-
-<br/>
+  
+<p align="center">
+    <a href="http://memory-studio.ap-northeast-2.elasticbeanstalk.com/">
+        <img alt="Documentation" src="https://img.shields.io/website/http/huggingface.co/docs/transformers/index.svg?down_color=red&down_message=offline&up_message=online">
+    </a>
+</p>
 
 ## Member
 
