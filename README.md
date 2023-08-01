@@ -12,7 +12,7 @@
         <img alt="GitHub release" src="https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white">
     </a>
     <a href="Appendix/docs.pdf">
-        <img alt="Python" src ="https://img.shields.io/badge/PDF-blue.svg?&style=for-the-badge&logo=pdf&logoColor=white">
+        <img alt="Python" src ="https://img.shields.io/badge/Document-blue.svg?&style=for-the-badge&logo=pdf&logoColor=white">
     </a>
 </p>
 
