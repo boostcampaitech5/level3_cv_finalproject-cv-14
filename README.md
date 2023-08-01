@@ -6,7 +6,7 @@
 - 특정 얼굴 사진을 Key로 사용하여 기존 사진 중 유사한 얼굴을 가진 사진을 찾을 수 있습니다.
 <br/>
 
-## Intro
+## 파일 구조
 
 <!--![](Appendix/intro.png)-->
 
@@ -50,12 +50,19 @@ Service
 
 ![](Appendix/member.png)
 
+
+| 김우진 | 신건희 | 신중현 | 이종휘 |
+| :----: | :----: | :----: | :----: |
+|https://github.com/w-jnn|https://github.com/Rigel0718 |https://github.com/Blackeyes0u0|https://github.com/gndldl|
+
+<!--
 |  이름  | github                          |
 | :----: | ------------------------------- |
 | 김우진 | https://github.com/w-jnn        |
 | 신건희 | https://github.com/Rigel0718    |
 | 신중현 | https://github.com/Blackeyes0u0 |
 | 이종휘 | https://github.com/gndldl       |
+-->
 
 <br/>
 
