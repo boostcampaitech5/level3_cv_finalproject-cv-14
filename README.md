@@ -112,10 +112,14 @@ requirements.txt: 필요한 파이썬 라이브러리를 기술한 파일입니�
 
 ## 2.3 Prepare Dataset ( For training)
 
-download the refined dataset: (emore recommended)
-
+download the refined dataset: (VGGFace2 recommended)
+[VGGFace2 dataset ](https://www.robots.ox.ac.uk/~vgg/data/vgg_face2/)
+- More Dataset please refer to the Department of Engineering Science, University of Oxford.
+- 
+<!--
 - [emore dataset @ BaiduDrive](https://pan.baidu.com/s/1eXohwNBHbbKXh5KHyItVhQ), [emore dataset @ Dropbox](https://www.dropbox.com/s/wpx6tqjf0y5mf6r/faces_ms1m-refine-v2_112x112.zip?dl=0)
 - More Dataset please refer to the [original post](https://github.com/deepinsight/insightface/wiki/Dataset-Zoo)
+-->
 
 <br/>
 
