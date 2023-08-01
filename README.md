@@ -1,5 +1,6 @@
 # 1. Memory sutdio
-
+![](Appendix/intro1.png)
+![](Appendix/intro2.png)
 <br/>
 
 ## Intro
