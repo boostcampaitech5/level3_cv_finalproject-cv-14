@@ -113,7 +113,7 @@ requirements.txt: 필요한 파이썬 라이브러리를 기술한 파일입니�
 ## 2.3 Prepare Dataset ( For training)
 
 download the refined dataset: (VGGFace2 recommended)
-[VGGFace2 dataset ](https://www.robots.ox.ac.uk/~vgg/data/vgg_face2/)
+[VGGFace2 dataset [Visual Geometry Group] ](https://www.robots.ox.ac.uk/~vgg/data/vgg_face2/)
 - More Dataset please refer to the Department of Engineering Science, University of Oxford.
 
 <!--
