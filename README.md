@@ -48,12 +48,12 @@ Service
 
 ## Member
 
-![](Appendix/member.png)
-
-
 | 김우진 | 신건희 | 신중현 | 이종휘 |
 | :----: | :----: | :----: | :----: |
 |https://github.com/w-jnn|https://github.com/Rigel0718 |https://github.com/Blackeyes0u0|https://github.com/gndldl|
+
+![](Appendix/member.png)
+
 
 <!--
 |  이름  | github                          |
