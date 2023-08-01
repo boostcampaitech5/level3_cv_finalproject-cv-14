@@ -5,11 +5,12 @@
 
   
 <p align="center">
-    <a href="http://memory-studio.ap-northeast-2.elasticbeanstalk.com/">
-        <img alt="Documentation" src="https://img.shields.io/website/http/huggingface.co/docs/transformers/index.svg?down_color=red&down_message=offline&up_message=online">
-    </a>
+
     <a href="https://www.youtube.com/watch?v=gP6VshZ0Cgg">
         <img alt="GitHub release" src="https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white">
+    </a>
+    <a href="http://memory-studio.ap-northeast-2.elasticbeanstalk.com/">
+        <img alt="Documentation" src="https://img.shields.io/website/http/huggingface.co/docs/transformers/index.svg?down_color=red&down_message=offline&up_message=online">
     </a>
     <a href="Appendix/docs.pdf">
         <img alt="Python" src ="https://img.shields.io/badge/Document-blue.svg?&style=for-the-badge&logo=pdf&logoColor=white">
