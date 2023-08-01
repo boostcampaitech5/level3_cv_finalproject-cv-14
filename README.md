@@ -2,7 +2,7 @@
     <img src="Appendix/hiai_logo.png" width="77"/>
     <h1>Memory Studio</h1>
 </div>
----
+
   
 <p align="center">
     <a href="http://memory-studio.ap-northeast-2.elasticbeanstalk.com/">
