@@ -50,7 +50,7 @@ Service
 
 <br/>
 
-## Web Page
+## Website
   
 <p>
     <a href="http://memory-studio.ap-northeast-2.elasticbeanstalk.com/">
