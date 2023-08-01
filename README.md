@@ -26,7 +26,7 @@
 >
 > service에는 Node.js를 구성하는 finalproject 폴더와 Flask api를 구성하는 deploy_ml 폴더로 되어있습니다.
 > 
-## 파일 구조
+## Folder Structure
 ```
 Face Recognition
 ├── Backbone
@@ -49,6 +49,7 @@ Service
 └── deploy_ml
   ├── app.py
   └── requirements.txt
+
 ```
 
 <br/>
