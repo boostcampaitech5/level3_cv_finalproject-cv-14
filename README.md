@@ -1,7 +1,7 @@
 
 <p align="center">
     <br>
-    <img src="Appendix/hiai_logo_240.png" width="100"/>
+    <img src="Appendix/hiai_logo_240.png" width="50"/>
     <br>
 <p>
   
@@ -9,8 +9,9 @@
     <a href="http://memory-studio.ap-northeast-2.elasticbeanstalk.com/">
         <img alt="Documentation" src="https://img.shields.io/website/http/huggingface.co/docs/transformers/index.svg?down_color=red&down_message=offline&up_message=online">
     </a>
+    
     <a href="https://youtu.be/gP6VshZ0Cgg">
-<!--         <img alt="GitHub release" src="Appendix/youtube.svg"> -->
+        <img alt="youtube" src="Appendix/youtube.svg">
     </a>
 </p>
 
