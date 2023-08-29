@@ -170,7 +170,6 @@ python train.py configs/config
 >
 > MongoDB Atlas를 사용하여 클라우드 환경의 MongoDB를 연결하였습니다.
 >
-> v100서버에 Flask를 통해 모델을 서빙하여 배포했습니다.
 
 
 <br/><br/>
